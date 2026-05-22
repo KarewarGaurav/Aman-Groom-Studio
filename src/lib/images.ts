@@ -18,11 +18,11 @@ export const IMAGES = {
     accessories: img("product-accessories.png"),
   },
   collections: {
-    sherwanis: img("product-maharaja-sherwani.png"),
-    tuxedos: img("product-imperial-tuxedo.png"),
-    indoWestern: img("product-indo-western.png"),
-    reception: img("product-reception-blazer.png"),
-    wedding: img("product-maharaja-sherwani.png"),
+    sherwanis: img("product-dynasty-sherwani.png"),
+    tuxedos: img("product-platinum-tuxedo.png"),
+    indoWestern: img("product-champagne-bandhgala.png"),
+    reception: img("product-sangeet-blazer.png"),
+    wedding: img("product-nizam-achkan.png"),
   },
   products: {
     maharajaSherwani: img("product-maharaja-sherwani.png"),

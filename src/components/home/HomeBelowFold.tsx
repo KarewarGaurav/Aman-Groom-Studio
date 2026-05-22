@@ -6,16 +6,16 @@ import { InstagramGallery } from "@/components/home/InstagramGallery";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import {
   getBestSellingProducts,
-  getNewArrivals,
-  getFeaturedProducts,
-  getTrendingProducts,
+  getHomeNewArrivals,
+  getHomeFeaturedProducts,
+  getHomeTrendingProducts,
 } from "@/data/products";
 
 export function HomeBelowFold() {
   const bestSellers = getBestSellingProducts(4);
-  const newArrivals = getNewArrivals(4);
-  const featured = getFeaturedProducts().slice(0, 4);
-  const trending = getTrendingProducts(4);
+  const newArrivals = getHomeNewArrivals(4);
+  const featured = getHomeFeaturedProducts(4);
+  const trending = getHomeTrendingProducts(4);
 
   return (
     <>
@@ -33,7 +33,7 @@ export function HomeBelowFold() {
         label="Just In"
         title="New Arrivals"
         subtitle="Fresh from the atelier"
-        products={newArrivals.length ? newArrivals : featured}
+        products={newArrivals}
         viewAllHref="/shop?sort=new"
         tone="cream"
       />

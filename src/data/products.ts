@@ -464,6 +464,35 @@ export const products: Product[] = [
   },
 ];
 
+/** Home page sliders — unique products & hero images per section */
+const HOME_NEW_ARRIVAL_IDS = ["p9", "p11", "p12", "p14"] as const;
+const HOME_FEATURED_IDS = ["p10", "p13", "p6", "p15"] as const;
+const HOME_TRENDING_IDS = ["p7", "p2", "p3", "p16"] as const;
+
+export function getProductsByIds(ids: readonly string[]): Product[] {
+  return ids
+    .map((id) => products.find((p) => p.id === id))
+    .filter((p): p is Product => p !== undefined);
+}
+
+export function getHomeNewArrivals(limit = 4): Product[] {
+  const curated = getProductsByIds(HOME_NEW_ARRIVAL_IDS);
+  if (curated.length >= limit) return curated.slice(0, limit);
+  return getNewArrivals(limit);
+}
+
+export function getHomeFeaturedProducts(limit = 4): Product[] {
+  const curated = getProductsByIds(HOME_FEATURED_IDS);
+  if (curated.length >= limit) return curated.slice(0, limit);
+  return getFeaturedProducts().slice(0, limit);
+}
+
+export function getHomeTrendingProducts(limit = 4): Product[] {
+  const curated = getProductsByIds(HOME_TRENDING_IDS);
+  if (curated.length >= limit) return curated.slice(0, limit);
+  return getTrendingProducts(limit);
+}
+
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
@@ -489,10 +518,16 @@ export function getNewArrivals(limit = 8): Product[] {
 }
 
 export function getTrendingProducts(limit = 6): Product[] {
-  return products
-    .filter((p) => p.inStock)
-    .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
-    .slice(0, limit);
+  const tagged = products.filter(
+    (p) =>
+      p.inStock &&
+      (p.tags?.some((t) =>
+        ["reception", "sangeet", "cocktail", "black-tie"].includes(t)
+      ) ??
+        false)
+  );
+  const pool = tagged.length >= limit ? tagged : products.filter((p) => p.inStock);
+  return pool.slice(0, limit);
 }
 
 export function getRecommendations(

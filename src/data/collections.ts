@@ -9,7 +9,7 @@ export const collections: Collection[] = [
     subtitle: "Regal sherwanis for the grand ceremony",
     description:
       "Opulent silhouettes inspired by Indian royalty — hand embroidery, rich silks, and ceremonial grandeur.",
-    image: IMAGES.collections.sherwanis,
+    image: IMAGES.products.dynastySherwani,
     productIds: ["p1", "p8", "p9", "p10"],
     featured: true,
   },
@@ -20,7 +20,7 @@ export const collections: Collection[] = [
     subtitle: "Western elegance redefined",
     description:
       "Precision-tailored tuxedos and formal wear for reception nights and cosmopolitan celebrations.",
-    image: IMAGES.collections.tuxedos,
+    image: IMAGES.products.platinumTuxedo,
     productIds: ["p2", "p7", "p13"],
     featured: true,
   },
@@ -31,7 +31,7 @@ export const collections: Collection[] = [
     subtitle: "Indo-western for the modern groom",
     description:
       "Contemporary silhouettes that honour tradition while embracing modern luxury.",
-    image: IMAGES.collections.indoWestern,
+    image: IMAGES.products.champagneBandhgala,
     productIds: ["p3", "p4", "p11", "p12"],
     featured: true,
   },
@@ -42,7 +42,7 @@ export const collections: Collection[] = [
     subtitle: "Statement pieces for celebration",
     description:
       "Velvet blazers, embellished jackets, and after-party essentials.",
-    image: IMAGES.collections.reception,
+    image: IMAGES.products.sangeetBlazer,
     productIds: ["p7", "p2", "p14"],
     featured: false,
   },
