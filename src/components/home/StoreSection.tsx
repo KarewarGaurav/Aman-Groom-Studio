@@ -34,7 +34,7 @@ export function StoreSection() {
   return (
     <section id="store" className="relative overflow-hidden">
       {/* ── Full-width editorial image header ── */}
-      <div className="relative h-[55vh] min-h-[360px] w-full md:h-[65vh]">
+      <div className="relative h-[50vh] min-h-[260px] w-full sm:min-h-[320px] md:h-[65vh] md:min-h-[360px]">
         <LuxuryImage
           src={IMAGES.store}
           alt="Aman Groom Studio boutique showroom"
@@ -47,7 +47,7 @@ export function StoreSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/70 via-transparent to-transparent" />
 
         {/* Heading overlaid on image */}
-        <div className="absolute inset-0 flex flex-col justify-end px-4 pb-12 md:px-8 lg:px-12">
+        <div className="absolute inset-0 flex flex-col justify-end px-3 pb-8 safe-x sm:px-4 sm:pb-12 md:px-8 lg:px-12">
           <div className="mx-auto w-full max-w-7xl">
             <motion.div
               initial={{ opacity: 0, y: 28 }}

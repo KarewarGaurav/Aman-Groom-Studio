@@ -35,7 +35,7 @@ export function ProductCard({
   };
 
   const productActionBtn =
-    "h-9 min-w-0 flex-1 overflow-visible px-2.5 text-[10px] tracking-[0.14em]";
+    "w-full min-w-0 gap-1.5 whitespace-nowrap shadow-none";
 
   return (
     <article className="group relative">
@@ -92,52 +92,67 @@ export function ProductCard({
               "md:translate-y-full md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
             )}
           >
-            <div className="flex gap-2 bg-gradient-to-t from-charcoal/75 via-charcoal/35 to-transparent px-3 pb-3 pt-8">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={cn(productActionBtn, "bg-warmwhite/95")}
+            <div className="flex items-stretch gap-2 bg-gradient-to-t from-charcoal/75 via-charcoal/35 to-transparent px-3 pb-3 pt-8">
+              <div className="flex min-w-0 flex-1">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="card"
+                      className={cn(productActionBtn, "bg-warmwhite/95")}
+                    >
+                      <Eye className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                      <span className="truncate">Quick View</span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    title={product.name}
+                    className="max-w-2xl border-taupe/20 bg-warmwhite"
                   >
-                    <Eye className="h-3.5 w-3.5 shrink-0" />
-                    Quick View
-                  </Button>
-                </DialogTrigger>
-                <DialogContent
-                  title={product.name}
-                  className="max-w-2xl border-taupe/20 bg-warmwhite"
-                >
-                  <LuxuryImage
-                    src={product.images[0]}
-                    alt={product.name}
-                    aspectClass="aspect-[4/3]"
-                  />
-                  <p className="text-charcoalsoft">{product.shortDescription}</p>
-                  <p className="font-display text-2xl text-burgundy">
-                    {formatPrice(product.price)}
-                  </p>
-                  <Button asChild variant="default" size="lg" className="w-full">
-                    <Link href={`/shop/${product.slug}`}>View Full Details</Link>
-                  </Button>
-                </DialogContent>
-              </Dialog>
+                    <LuxuryImage
+                      src={product.images[0]}
+                      alt={product.name}
+                      aspectClass="aspect-[4/3]"
+                    />
+                    <p className="text-charcoalsoft">{product.shortDescription}</p>
+                    <p className="font-display text-2xl text-burgundy">
+                      {formatPrice(product.price)}
+                    </p>
+                    <Button asChild variant="default" size="lg" className="w-full">
+                      <Link href={`/shop/${product.slug}`}>View Full Details</Link>
+                    </Button>
+                  </DialogContent>
+                </Dialog>
+              </div>
 
-              {quickAdd && product.inStock ? (
-                <Button
-                  variant="gold"
-                  size="sm"
-                  className={productActionBtn}
-                  onClick={handleQuickAdd}
-                >
-                  <ShoppingBag className="h-3.5 w-3.5 shrink-0" />
-                  Add
-                </Button>
-              ) : (
-                <Button asChild variant="gold" size="sm" className={productActionBtn}>
-                  <Link href={`/shop/${product.slug}`}>View</Link>
-                </Button>
-              )}
+              <div className="flex min-w-0 flex-1">
+                {quickAdd && product.inStock ? (
+                  <Button
+                    variant="gold"
+                    size="card"
+                    className={productActionBtn}
+                    onClick={handleQuickAdd}
+                  >
+                    <ShoppingBag className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                    <span className="truncate">Add</span>
+                  </Button>
+                ) : (
+                  <Button
+                    asChild
+                    variant="gold"
+                    size="card"
+                    className={productActionBtn}
+                  >
+                    <Link
+                      href={`/shop/${product.slug}`}
+                      className="inline-flex w-full items-center justify-center gap-1.5"
+                    >
+                      <ShoppingBag className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                      <span className="truncate">View</span>
+                    </Link>
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         </div>

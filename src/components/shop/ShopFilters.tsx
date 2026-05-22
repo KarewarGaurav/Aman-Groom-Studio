@@ -27,11 +27,11 @@ export function ShopFilters() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
+      <div className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
         <Link
           href={buildHref("", sort)}
           className={cn(
-            "rounded-sm px-4 py-2 text-xs uppercase tracking-widest transition-colors",
+            "shrink-0 rounded-sm px-4 py-2 text-xs uppercase tracking-widest transition-colors",
             !category
               ? "bg-charcoal text-warmwhite"
               : "border border-bronze/20 bg-gradient-to-b from-warmwhite to-cream/60 text-charcoalsoft hover:border-sandgold/30 hover:from-champagne/20 hover:to-cream"
@@ -44,7 +44,7 @@ export function ShopFilters() {
             key={cat.id}
             href={buildHref(cat.id, sort)}
             className={cn(
-              "rounded-sm px-4 py-2 text-xs uppercase tracking-widest transition-colors",
+              "shrink-0 rounded-sm px-4 py-2 text-xs uppercase tracking-widest transition-colors",
               category === cat.id
                 ? "bg-charcoal text-warmwhite"
                 : "border border-bronze/20 bg-gradient-to-b from-warmwhite to-cream/60 text-charcoalsoft hover:border-sandgold/30 hover:from-champagne/20 hover:to-cream"

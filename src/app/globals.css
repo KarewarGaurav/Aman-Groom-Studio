@@ -43,10 +43,13 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-ivory font-body text-charcoal antialiased;
+    overflow-x: clip;
+    max-width: 100%;
     background-color: var(--ivory);
     background-image:
       radial-gradient(ellipse 80% 50% at 0% 0%, rgba(228, 213, 188, 0.45), transparent 55%),
@@ -113,7 +116,7 @@
   }
 
   .editorial-title {
-    @apply font-display text-4xl font-light tracking-tight text-charcoal md:text-5xl lg:text-6xl;
+    @apply font-display text-3xl font-light tracking-tight text-charcoal sm:text-4xl md:text-5xl lg:text-6xl;
     line-height: 1.08;
   }
 
@@ -122,7 +125,7 @@
   }
 
   .section-padding {
-    @apply px-4 py-16 md:px-8 md:py-24 lg:px-12 lg:py-28;
+    @apply px-3 py-12 sm:px-4 sm:py-16 md:px-8 md:py-24 lg:px-12 lg:py-28;
   }
 
   .product-card-shadow {
@@ -550,6 +553,24 @@
   .safe-x {
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
     padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .mobile-nav-pad {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mobile-sticky-above-nav {
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .filter-scroll-row {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .filter-scroll-row::-webkit-scrollbar {
+    display: none;
   }
 
   .animate-marquee {

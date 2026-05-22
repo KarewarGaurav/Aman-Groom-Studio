@@ -18,15 +18,15 @@ export function PromoBanner() {
           aria-hidden
         />
         <div className="relative grid md:grid-cols-2">
-          <div className="flex flex-col justify-center px-8 py-12 md:px-12 md:py-16">
+          <div className="flex flex-col justify-center px-5 py-10 sm:px-8 sm:py-12 md:px-12 md:py-16">
             <p className="editorial-label">Limited Offer</p>
-            <h2 className="mt-3 font-displayAlt text-3xl text-charcoal md:text-4xl lg:text-5xl">
+            <h2 className="mt-3 font-displayAlt text-2xl text-charcoal sm:text-3xl md:text-4xl lg:text-5xl">
               {PROMO.headline}
             </h2>
             <p className="mt-4 max-w-md font-sans leading-relaxed text-charcoalsoft">
               {PROMO.subline}
             </p>
-            <Button asChild className="mt-8 w-fit" variant="default" size="lg">
+            <Button asChild className="mt-8 w-full sm:w-fit" variant="default" size="lg">
               <Link href={PROMO.href}>{PROMO.cta}</Link>
             </Button>
           </div>

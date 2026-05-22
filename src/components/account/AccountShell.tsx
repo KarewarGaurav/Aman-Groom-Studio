@@ -54,13 +54,13 @@ export function AccountShell({
       ref={ref}
       className="bg-ivory pb-24 pt-20 safe-x sm:pt-24 md:pb-28 md:pt-28 lg:pb-8"
     >
-      <div className="mx-auto max-w-6xl px-4 md:px-8">
+      <div className="mx-auto max-w-6xl px-3 sm:px-4 md:px-8">
         <div className="flex flex-col gap-10 lg:h-[calc(100dvh-8.5rem)] lg:flex-row lg:gap-10 lg:overflow-hidden">
           <aside
             data-dash-card
             className="lg:w-56 lg:shrink-0 lg:overflow-hidden"
           >
-            <nav className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 [-webkit-overflow-scrolling:touch] lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
+            <nav className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-2 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
               {nav.map(({ href, label, icon: Icon }) => (
                 <Link
                   key={href}

@@ -49,7 +49,7 @@ export function Navbar() {
           scrolled ? "navbar-glass py-3" : "navbar-glass-top py-4"
         )}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 safe-x sm:px-4 md:px-8">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo.png"
@@ -82,7 +82,7 @@ export function Navbar() {
                 Shop
               </Link>
               {megaOpen && (
-                <div className="absolute left-1/2 top-full mt-3 w-[560px] -translate-x-1/2 glass-panel rounded-sm p-6 shadow-luxury">
+                <div className="absolute left-1/2 top-full mt-3 w-[min(560px,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] -translate-x-1/2 glass-panel rounded-sm p-4 shadow-luxury sm:p-6">
                   <div className="grid grid-cols-2 gap-4">
                     {CATEGORIES.slice(0, 4).map((cat) => (
                       <Link

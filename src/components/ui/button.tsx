@@ -16,9 +16,10 @@ const buttonVariants = cva(
         link: "rounded-none border-0 bg-transparent p-0 font-normal normal-case tracking-normal text-burgundy shadow-none hover:underline",
       },
       size: {
-        default: "h-12 min-w-[10.5rem] px-8",
-        sm: "h-10 min-w-[9rem] px-6 text-[10px]",
-        lg: "h-14 min-w-[11.5rem] px-10 text-sm tracking-[0.22em]",
+        default: "h-12 min-w-0 px-6 sm:min-w-[10.5rem] sm:px-8",
+        sm: "h-10 min-w-0 px-5 sm:min-w-[9rem] sm:px-6 text-[10px]",
+        card: "h-9 min-h-9 min-w-0 px-2.5 text-[10px] tracking-[0.14em] leading-none",
+        lg: "h-14 min-w-0 px-8 sm:min-w-[11.5rem] sm:px-10 text-sm tracking-[0.22em]",
         icon: "h-11 w-11 min-w-0 p-0",
       },
     },

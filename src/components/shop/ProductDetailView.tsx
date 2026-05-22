@@ -45,8 +45,8 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
   };
 
   return (
-    <div className="bg-ivory pb-32 pt-24 md:pt-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
+    <div className="bg-ivory pb-36 pt-20 sm:pb-32 sm:pt-24 md:pt-28">
+      <div className="mx-auto max-w-7xl px-3 safe-x sm:px-4 md:px-8">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-cream product-card-shadow">
@@ -88,11 +88,11 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
             <p className="text-xs uppercase tracking-[0.3em] text-bronze">
               {product.category.replace("-", " ")}
             </p>
-            <h1 className="mt-2 font-displayAlt text-4xl text-charcoal md:text-5xl">
+            <h1 className="mt-2 font-displayAlt text-3xl text-charcoal sm:text-4xl md:text-5xl">
               {product.name}
             </h1>
             <div className="mt-4 flex items-baseline gap-3">
-              <span className="font-display text-3xl text-charcoal">
+              <span className="font-display text-2xl text-charcoal sm:text-3xl">
                 {formatPrice(product.price)}
               </span>
               {product.compareAtPrice && (
@@ -165,10 +165,11 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button
                 variant="default"
                 size="lg"
+                className="w-full sm:w-auto"
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
               >
@@ -209,7 +210,7 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
 
         {recommendations.length > 0 && (
           <section className="mt-20 content-auto">
-            <h2 className="mb-8 font-display text-3xl text-charcoal">
+            <h2 className="mb-8 font-display text-2xl text-charcoal sm:text-3xl">
               You May Also Like
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -221,9 +222,9 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
         )}
       </div>
 
-      <div className="fixed bottom-20 left-0 right-0 z-30 glass-panel-solid border-t border-taupe/15 p-4 md:hidden">
+      <div className="mobile-sticky-above-nav fixed left-0 right-0 z-30 glass-panel-solid border-t border-taupe/15 p-3 safe-x sm:p-4 md:hidden">
         <Button
-          className="w-full"
+          className="w-full min-w-0"
           variant="default"
           onClick={handleAddToCart}
           disabled={!product.inStock}

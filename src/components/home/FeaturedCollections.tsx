@@ -24,7 +24,7 @@ export function FeaturedCollections() {
       title="Featured Luxury Collections"
       subtitle="Each collection tells a chapter of your wedding story"
     >
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {featured.map((col, i) => (
           <motion.div
             key={col.id}
@@ -44,13 +44,13 @@ export function FeaturedCollections() {
                 aspectClass="aspect-[4/5]"
               />
               <motion.div
-                className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent p-6 md:p-8"
+                className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent p-4 sm:p-6 md:p-8"
                 initial={false}
               >
                 <p className="text-xs uppercase tracking-[0.3em] text-gold">
                   {col.subtitle}
                 </p>
-                <h3 className="mt-2 font-display text-3xl text-ivory transition-colors duration-300 group-hover:text-gold">
+                <h3 className="mt-2 font-display text-2xl text-ivory transition-colors duration-300 group-hover:text-gold sm:text-3xl">
                   {col.title}
                 </h3>
                 <span className="mt-4 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-champagne opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-gold">

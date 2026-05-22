@@ -183,8 +183,8 @@ export function BespokeSection() {
             transition={{ delay: 0.45, duration: 0.6 }}
             className="flex flex-col gap-4 sm:flex-row sm:items-center"
           >
-            <Button asChild variant="gold" size="lg" className="group">
-              <Link href="/booking">
+            <Button asChild variant="gold" size="lg" className="group w-full sm:w-auto">
+              <Link href="/booking" className="!whitespace-normal text-center sm:!whitespace-nowrap">
                 Begin Your Bespoke Journey
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
@@ -220,7 +220,7 @@ export function BespokeSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="absolute -bottom-4 -left-4 glass-panel corner-marks border-gold/20 px-6 py-4 md:-bottom-6 md:-left-6"
+            className="absolute -bottom-2 left-2 glass-panel corner-marks border-gold/20 px-4 py-3 sm:-bottom-4 sm:-left-4 sm:px-6 sm:py-4 md:-bottom-6 md:-left-6"
           >
             <p className="font-display text-3xl text-gradient-gold md:text-4xl">
               120+
@@ -235,7 +235,7 @@ export function BespokeSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.55, duration: 0.6 }}
-            className="absolute -right-3 top-8 glass-panel border-gold/20 px-5 py-3 md:-right-5 md:top-10"
+            className="absolute right-2 top-4 hidden glass-panel border-gold/20 px-5 py-3 sm:block sm:-right-3 sm:top-8 md:-right-5 md:top-10"
           >
             <p className="font-body text-[10px] uppercase tracking-[0.35em] text-gold">
               Master tailor

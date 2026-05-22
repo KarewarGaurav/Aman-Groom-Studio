@@ -9,7 +9,7 @@ import { BRAND } from "@/lib/constants";
 
 export function BookingCTA() {
   return (
-    <section className="relative overflow-hidden py-28 md:py-36">
+    <section className="relative overflow-hidden py-16 sm:py-24 md:py-36">
       {/* Deep background */}
       <div className="absolute inset-0 bg-gradient-to-br from-wine via-charcoal to-burgundy/80" />
       <div className="grain-overlay absolute inset-0 opacity-60" aria-hidden />
@@ -39,7 +39,7 @@ export function BookingCTA() {
       <div className="pointer-events-none absolute bottom-6 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" aria-hidden />
 
       {/* Content */}
-      <div className="relative mx-auto max-w-3xl px-4 text-center md:px-8">
+      <div className="relative mx-auto max-w-3xl px-3 text-center safe-x sm:px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export function BookingCTA() {
             <span className="h-px w-10 bg-gold/50" />
           </div>
 
-          <h2 className="font-display text-4xl font-light leading-[1.05] text-ivory md:text-6xl lg:text-7xl">
+          <h2 className="font-display text-3xl font-light leading-[1.05] text-ivory sm:text-4xl md:text-6xl lg:text-7xl">
             Reserve Your
             <br />
             <em className="text-gradient-gold not-italic">Consultation</em>
@@ -64,7 +64,7 @@ export function BookingCTA() {
           </p>
 
           {/* Stats row */}
-          <div className="mx-auto mt-10 flex max-w-sm justify-around border-y border-gold/20 py-6">
+          <div className="mx-auto mt-8 flex max-w-sm flex-col gap-4 border-y border-gold/20 py-6 sm:mt-10 sm:flex-row sm:justify-around sm:gap-0">
             {[
               ["By Appointment", "Exclusive Access"],
               ["Same Week", "Slots Available"],
@@ -76,19 +76,19 @@ export function BookingCTA() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" variant="gold">
-              <Link href="/booking" className="inline-flex items-center gap-2">
+          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <Button asChild size="lg" variant="gold" className="w-full sm:w-auto">
+              <Link href="/booking" className="inline-flex items-center justify-center gap-2">
                 <Calendar className="h-4 w-4" />
                 Book Appointment
               </Link>
             </Button>
-            <Button asChild size="lg" variant="luxury">
+            <Button asChild size="lg" variant="luxury" className="w-full sm:w-auto">
               <a
                 href={`https://wa.me/${BRAND.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2"
+                className="inline-flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon />
                 WhatsApp Us

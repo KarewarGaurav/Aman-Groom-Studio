@@ -19,7 +19,7 @@ const SUPPORT_LINKS = [
 export function Footer() {
   return (
     <footer className="border-t border-sandgold/20 bg-gradient-to-b from-cream via-champagne/30 to-ivory">
-      <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl px-3 py-12 safe-x sm:px-4 sm:py-14 md:px-8 md:pb-14 lg:px-12">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="flex items-center gap-3">
@@ -126,9 +126,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-taupe/15 pt-6 text-[11px] text-charcoalsoft md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-taupe/15 pt-6 text-center text-[11px] text-charcoalsoft md:flex-row md:text-left">
           <p>© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
-          <p>{BRAND.location}</p>
+          <p className="max-w-xs md:max-w-none">{BRAND.location}</p>
         </div>
       </div>
     </footer>

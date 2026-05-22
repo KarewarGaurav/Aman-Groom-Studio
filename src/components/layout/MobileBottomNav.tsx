@@ -20,8 +20,8 @@ export function MobileBottomNav() {
   );
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 glass-panel-solid border-t border-taupe/15 md:hidden">
-      <ul className="flex items-center justify-around py-2">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 glass-panel-solid border-t border-taupe/15 pb-[env(safe-area-inset-bottom,0px)] md:hidden">
+      <ul className="flex items-center justify-around py-2 safe-x">
         {links.map(({ href, icon: Icon, label }) => (
           <li key={href}>
             <Link

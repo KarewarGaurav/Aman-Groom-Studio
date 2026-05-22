@@ -71,12 +71,12 @@ export default function BookingPage() {
   }
 
   return (
-    <div className="pt-28 pb-20">
-      <div className="mx-auto max-w-2xl px-4 md:px-8">
+    <div className="pt-20 pb-28 safe-x sm:pt-24 sm:pb-24 md:pt-28 md:pb-20">
+      <div className="mx-auto max-w-2xl px-3 sm:px-4 md:px-8">
         <p className="text-xs uppercase tracking-[0.4em] text-gold">
           Private Appointment
         </p>
-        <h1 className="mt-2 font-display text-4xl md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl sm:text-4xl md:text-5xl">
           Groom Styling Consultation
         </h1>
         <p className="mt-4 text-champagne/80">

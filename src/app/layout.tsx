@@ -76,7 +76,10 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${bodoni.variable} ${manrope.variable} ${jakarta.variable}`}
     >
-      <body className="min-h-screen pb-20 md:pb-0" suppressHydrationWarning>
+      <body
+        className="min-h-screen overflow-x-clip pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-0"
+        suppressHydrationWarning
+      >
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

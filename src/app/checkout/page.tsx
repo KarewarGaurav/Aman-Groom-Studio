@@ -109,20 +109,20 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="bg-ivory pb-24 pt-20 safe-x sm:pb-20 sm:pt-24 md:pt-28">
-      <div className="mx-auto max-w-6xl px-4 md:px-8">
+    <div className="bg-ivory pb-28 pt-20 safe-x sm:pb-24 sm:pt-24 md:pb-20 md:pt-28">
+      <div className="mx-auto max-w-6xl px-3 sm:px-4 md:px-8">
         <h1 className="font-display text-3xl text-charcoal sm:text-4xl">Checkout</h1>
 
         <CheckoutAuthGate />
 
         {isAuthenticated && (
           <>
-            <div className="mt-8 flex gap-2 overflow-x-auto">
+            <div className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
               {steps.map((s, i) => (
                 <div
                   key={s}
                   className={cn(
-                    "flex items-center gap-2 whitespace-nowrap px-3 py-2 text-xs uppercase tracking-widest",
+                    "flex shrink-0 items-center gap-2 whitespace-nowrap px-3 py-2 text-xs uppercase tracking-widest",
                     i <= step ? "text-burgundy" : "text-taupe"
                   )}
                 >

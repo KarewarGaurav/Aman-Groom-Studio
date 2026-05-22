@@ -11,9 +11,9 @@ export default function WishlistPage() {
   const wishlisted = products.filter((p) => ids.includes(p.id));
 
   return (
-    <div className="bg-ivory pb-20 pt-24 md:pt-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <h1 className="font-display text-4xl text-charcoal">Wishlist</h1>
+    <div className="bg-ivory pb-28 pt-20 safe-x sm:pb-24 sm:pt-24 md:pt-28 md:pb-20">
+      <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-8">
+        <h1 className="font-display text-3xl text-charcoal sm:text-4xl">Wishlist</h1>
         <p className="mt-2 text-charcoalsoft">
           {wishlisted.length} {wishlisted.length === 1 ? "item" : "items"} saved
         </p>
@@ -28,7 +28,7 @@ export default function WishlistPage() {
             </Button>
           </div>
         ) : (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-6 min-[400px]:grid-cols-2 lg:grid-cols-4">
             {wishlisted.map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} quickAdd />
             ))}

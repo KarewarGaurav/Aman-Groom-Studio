@@ -21,7 +21,9 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen w-full max-w-[100vw] overflow-x-clip">
+        {children}
+      </main>
       <Footer />
       <MobileBottomNav />
       <CartDrawer />

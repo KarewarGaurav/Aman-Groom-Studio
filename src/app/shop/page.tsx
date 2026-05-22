@@ -29,7 +29,7 @@ function ShopContent() {
   }, [category, sort]);
 
   return (
-    <div className="pt-24 md:pt-28">
+    <div className="pt-20 sm:pt-24 md:pt-28">
       <SectionWrapper
         label="Shop"
         title="All Collections"
@@ -43,7 +43,7 @@ function ShopContent() {
             No products match this filter.
           </p>
         ) : (
-          <div className="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
+          <div className="mt-10 grid grid-cols-1 gap-6 min-[400px]:grid-cols-2 sm:gap-7 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
             {filtered.map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} quickAdd />
             ))}

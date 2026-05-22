@@ -13,7 +13,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden hero-editorial-bg pt-24 md:pt-28"
+      className="relative overflow-hidden hero-editorial-bg pt-20 sm:pt-24 md:pt-28"
     >
       <div
         className="hero-pattern-overlay pointer-events-none absolute inset-0 opacity-60"
@@ -28,7 +28,7 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-16 md:px-8 lg:px-12 lg:pb-24">
+      <div className="relative mx-auto max-w-7xl px-3 pb-12 safe-x sm:px-4 sm:pb-16 md:px-8 lg:px-12 lg:pb-24">
         <div className="mb-8 hidden items-center gap-3 md:flex" aria-hidden>
           <span className="h-px w-12 bg-gradient-to-r from-transparent to-sandgold/70" />
           <span className="editorial-label text-bronze/80">New Delhi · Couture</span>
@@ -37,7 +37,7 @@ export function HeroSection() {
 
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
           <div className="order-2 md:order-1">
-            <div className="inline-flex items-center gap-3 rounded-full border border-sandgold/25 bg-warmwhite/70 px-4 py-1.5 shadow-soft backdrop-blur-sm">
+            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-sandgold/25 bg-warmwhite/70 px-3 py-1.5 shadow-soft backdrop-blur-sm sm:gap-3 sm:px-4">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden />
               <p data-hero-label className="editorial-label !tracking-[0.32em]">
                 {BRAND.tagline}
@@ -45,7 +45,7 @@ export function HeroSection() {
             </div>
             <h1
               data-hero-title
-              className="mt-5 font-displayAlt text-5xl font-medium leading-[1.05] text-charcoal md:text-6xl lg:text-7xl"
+              className="mt-5 font-displayAlt text-3xl font-medium leading-[1.05] text-charcoal sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             >
               Shop Luxury
               <br />

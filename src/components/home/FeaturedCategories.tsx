@@ -24,7 +24,7 @@ export function FeaturedCategories() {
     >
       <div
         ref={gridRef}
-        className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-6"
+        className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:gap-6"
       >
         {CATEGORIES.map((cat) => (
           <Link
@@ -42,8 +42,8 @@ export function FeaturedCategories() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/25 via-transparent to-champagne/10 opacity-80 transition-opacity group-hover:opacity-100" />
             </div>
-            <div className="flex items-center justify-between border-t border-sandgold/15 bg-gradient-to-r from-warmwhite/90 to-champagne/20 px-4 py-4">
-              <h3 className="font-display text-lg text-charcoal transition-colors group-hover:text-burgundy md:text-xl">
+            <div className="flex items-center justify-between gap-2 border-t border-sandgold/15 bg-gradient-to-r from-warmwhite/90 to-champagne/20 px-3 py-3 sm:px-4 sm:py-4">
+              <h3 className="min-w-0 font-display text-sm text-charcoal transition-colors group-hover:text-burgundy sm:text-lg md:text-xl">
                 {cat.label}
               </h3>
               <span className="flex h-8 w-8 items-center justify-center rounded-full border border-sandgold/25 bg-warmwhite/80 transition-all group-hover:border-gold/40 group-hover:bg-champagne/40">

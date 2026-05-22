@@ -82,7 +82,7 @@ export function WeddingTimeline() {
                   delay: 0.2 + i * 0.18,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`relative flex items-start gap-8 pb-16 pl-20 md:items-center md:pl-0 ${
+                className={`relative flex items-start gap-4 pb-12 pl-14 sm:gap-6 sm:pb-14 sm:pl-16 md:items-center md:gap-8 md:pb-16 md:pl-0 ${
                   isLeft
                     ? "md:flex-row md:pr-[calc(50%+2rem)]"
                     : "md:flex-row-reverse md:pl-[calc(50%+2rem)]"
@@ -97,7 +97,7 @@ export function WeddingTimeline() {
                       : { scale: 0, opacity: 0 }
                   }
                   transition={{ delay: 0.35 + i * 0.18, duration: 0.4 }}
-                  className="absolute left-[13px] top-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold bg-charcoal shadow-[0_0_16px_rgba(212,175,106,0.35)] md:left-1/2 md:-translate-x-1/2 md:top-auto"
+                  className="absolute left-[9px] top-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold bg-charcoal shadow-[0_0_16px_rgba(212,175,106,0.35)] sm:left-[13px] md:left-1/2 md:-translate-x-1/2 md:top-auto"
                   aria-hidden
                 >
                   <span className="font-body text-[10px] font-semibold tracking-wider text-gold">
@@ -109,7 +109,7 @@ export function WeddingTimeline() {
                 <motion.div
                   whileHover={{ y: -4, scale: 1.01 }}
                   transition={{ duration: 0.3 }}
-                  className={`w-full overflow-hidden border border-white/8 bg-gradient-to-br ${step.accent} glass-panel p-6 md:p-8`}
+                  className={`min-w-0 w-full overflow-hidden border border-white/8 bg-gradient-to-br ${step.accent} glass-panel p-4 sm:p-6 md:p-8`}
                 >
                   <div
                     className={`flex items-start gap-4 ${
@@ -123,7 +123,7 @@ export function WeddingTimeline() {
                       <p className="mb-1 font-body text-[10px] uppercase tracking-[0.3em] text-gold/80">
                         {step.label}
                       </p>
-                      <h3 className="font-display text-2xl font-light text-ivory md:text-3xl">
+                      <h3 className="font-display text-xl font-light text-ivory sm:text-2xl md:text-3xl">
                         {step.title}
                       </h3>
                       <p className="mt-3 font-body text-sm leading-relaxed text-champagne/80 md:text-base">
