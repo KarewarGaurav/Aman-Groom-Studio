@@ -7,6 +7,7 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart-store";
 import { formatPrice } from "@/lib/utils";
+import { CouponSection } from "@/components/checkout/CouponSection";
 
 export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen);
@@ -16,37 +17,41 @@ export function CartDrawer() {
   const removeItem = useCartStore((s) => s.removeItem);
   const subtotal = useCartStore((s) => s.subtotal);
   const total = useCartStore((s) => s.total);
+  const discountSummary = useCartStore((s) => s.discountSummary);
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
-      <SheetContent side="right" className="flex w-full flex-col p-0 sm:max-w-md">
-        <div className="border-b border-white/10 px-6 py-6">
-          <h2 className="font-display text-2xl">Your Selection</h2>
-          <p className="text-sm text-champagne/70">
-            {items.length} {items.length === 1 ? "piece" : "pieces"}
+      <SheetContent
+        side="right"
+        title="Shopping Bag"
+        className="flex w-full flex-col bg-warmwhite p-0 sm:max-w-md"
+      >
+        <div className="border-b border-taupe/15 px-6 py-6">
+          <p className="text-sm text-charcoalsoft">
+            {items.length} {items.length === 1 ? "item" : "items"}
           </p>
         </div>
 
         <div className="flex-1 overflow-y-auto px-6">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <p className="font-display text-xl text-champagne/60">
-                Your cart awaits
+              <p className="font-display text-xl text-charcoalsoft">
+                Your bag is empty
               </p>
-              <p className="mt-2 text-sm text-champagne/50">
-                Explore our luxury collections
-              </p>
-              <Button asChild className="mt-6" variant="gold">
+              <Button asChild className="mt-6" variant="default">
                 <Link href="/shop" onClick={closeCart}>
-                  Explore Collection
+                  Start Shopping
                 </Link>
               </Button>
             </div>
           ) : (
-            <ul className="divide-y divide-white/10">
+            <ul className="divide-y divide-taupe/10">
               {items.map((item) => (
-                <li key={`${item.productId}-${item.size}-${item.color}`} className="flex gap-4 py-5">
-                  <div className="relative h-24 w-20 shrink-0 overflow-hidden bg-wine/30">
+                <li
+                  key={`${item.productId}-${item.size}-${item.color}`}
+                  className="flex gap-4 py-5"
+                >
+                  <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-sm bg-cream">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -59,14 +64,16 @@ export function CartDrawer() {
                     <Link
                       href={`/shop/${item.slug}`}
                       onClick={closeCart}
-                      className="font-display text-lg hover:text-gold"
+                      className="font-display text-lg text-charcoal hover:text-burgundy"
                     >
                       {item.name}
                     </Link>
-                    <p className="text-xs text-champagne/60">
+                    <p className="text-xs text-charcoalsoft">
                       {item.size} · {item.color}
                     </p>
-                    <p className="mt-1 text-gold">{formatPrice(item.price)}</p>
+                    <p className="mt-1 font-medium text-charcoal">
+                      {formatPrice(item.price)}
+                    </p>
                     <div className="mt-2 flex items-center gap-3">
                       <button
                         type="button"
@@ -78,7 +85,7 @@ export function CartDrawer() {
                             item.quantity - 1
                           )
                         }
-                        className="p-1 text-champagne hover:text-ivory"
+                        className="p-1 text-charcoalsoft hover:text-charcoal"
                         aria-label="Decrease quantity"
                       >
                         <Minus className="h-4 w-4" />
@@ -94,7 +101,7 @@ export function CartDrawer() {
                             item.quantity + 1
                           )
                         }
-                        className="p-1 text-champagne hover:text-ivory"
+                        className="p-1 text-charcoalsoft hover:text-charcoal"
                         aria-label="Increase quantity"
                       >
                         <Plus className="h-4 w-4" />
@@ -104,7 +111,7 @@ export function CartDrawer() {
                         onClick={() =>
                           removeItem(item.productId, item.size, item.color)
                         }
-                        className="ml-auto p-1 text-champagne/50 hover:text-red-400"
+                        className="ml-auto p-1 text-taupe hover:text-burgundy"
                         aria-label="Remove item"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -118,17 +125,24 @@ export function CartDrawer() {
         </div>
 
         {items.length > 0 && (
-          <div className="border-t border-white/10 p-6">
-            <div className="mb-4 flex justify-between text-sm">
-              <span className="text-champagne">Subtotal</span>
+          <div className="border-t border-taupe/15 p-6">
+            <CouponSection compact />
+            <div className="mb-3 mt-4 flex justify-between text-sm text-charcoalsoft">
+              <span>Subtotal</span>
               <span>{formatPrice(subtotal())}</span>
             </div>
-            <div className="mb-6 flex justify-between font-display text-lg">
+            {discountSummary().totalDiscount > 0 && (
+              <div className="mb-3 flex justify-between text-sm text-bronze">
+                <span>Discount</span>
+                <span>−{formatPrice(discountSummary().totalDiscount)}</span>
+              </div>
+            )}
+            <div className="mb-6 flex justify-between font-display text-lg text-charcoal">
               <span>Total</span>
-              <span className="text-gold">{formatPrice(total())}</span>
+              <span>{formatPrice(total())}</span>
             </div>
-            <Button asChild className="w-full" variant="gold" onClick={closeCart}>
-              <Link href="/checkout">Proceed to Checkout</Link>
+            <Button asChild className="w-full" variant="default" onClick={closeCart}>
+              <Link href="/checkout">Checkout</Link>
             </Button>
           </div>
         )}

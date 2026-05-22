@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/HeroSection";
-import { FeaturedCollections } from "@/components/home/FeaturedCollections";
-import { MarqueeStrip } from "@/components/common/MarqueeStrip";
+import { FeaturedCategories } from "@/components/home/FeaturedCategories";
+import { SectionDivider } from "@/components/common/SectionDivider";
 import { SectionSkeleton } from "@/components/common/SectionSkeleton";
 
 const HomeBelowFold = dynamic(
@@ -10,7 +10,7 @@ const HomeBelowFold = dynamic(
       default: m.HomeBelowFold,
     })),
   {
-    loading: () => <SectionSkeleton variant="tall" />,
+    loading: () => <SectionSkeleton variant="grid" />,
   }
 );
 
@@ -18,8 +18,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <MarqueeStrip />
-      <FeaturedCollections />
+      <SectionDivider label="Signature Collections" />
+      <FeaturedCategories />
       <HomeBelowFold />
     </>
   );

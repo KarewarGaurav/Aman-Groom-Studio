@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
-import { CartDrawer } from "@/components/cart/CartDrawer";
-import { MotionProvider } from "@/components/providers/MotionProvider";
+import {
+  Cormorant_Garamond,
+  Manrope,
+  Bodoni_Moda,
+  Plus_Jakarta_Sans,
+} from "next/font/google";
+import { AppProviders } from "@/components/providers/AppProviders";
 import { BRAND } from "@/lib/constants";
 import "./globals.css";
 
@@ -16,6 +17,13 @@ const cormorant = Cormorant_Garamond({
   preload: true,
 });
 
+const bodoni = Bodoni_Moda({
+  subsets: ["latin"],
+  variable: "--font-bodoni",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
@@ -23,21 +31,27 @@ const manrope = Manrope({
   preload: true,
 });
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
   ),
   title: {
-    default: `${BRAND.name} | ${BRAND.tagline}`,
+    default: `${BRAND.name} | Luxury Groom Fashion`,
     template: `%s | ${BRAND.name}`,
   },
   description:
-    "Premium Indian groom couture — bespoke sherwanis, luxury tuxedos, Indo-western ensembles, and personalized wedding styling in New Delhi.",
+    "Shop luxury groom couture — sherwanis, tuxedos, Indo-western, kurta sets, and wedding accessories. Premium fashion ecommerce in New Delhi.",
   keywords: [
-    "luxury groom wear",
-    "wedding sherwani",
-    "bespoke tailoring Delhi",
-    "groom couture India",
+    "luxury groom wear shop",
+    "wedding sherwani online",
+    "groom fashion ecommerce",
+    "luxury tuxedo India",
   ],
   openGraph: {
     title: BRAND.name,
@@ -58,15 +72,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${bodoni.variable} ${manrope.variable} ${jakarta.variable}`}
+    >
       <body className="min-h-screen pb-20 md:pb-0" suppressHydrationWarning>
-        <MotionProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <MobileBottomNav />
-          <CartDrawer />
-        </MotionProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

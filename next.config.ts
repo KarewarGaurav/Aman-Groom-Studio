@@ -13,7 +13,12 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["framer-motion", "lucide-react"],
+    optimizePackageImports: [
+      "framer-motion",
+      "lucide-react",
+      "gsap",
+      "@gsap/react",
+    ],
   },
 };
 

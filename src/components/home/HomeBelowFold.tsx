@@ -1,27 +1,63 @@
-import { BespokeSection } from "@/components/home/BespokeSection";
-import { WeddingTimeline } from "@/components/home/WeddingTimeline";
-import { FeaturedProducts } from "@/components/home/FeaturedProducts";
+import { ProductSlider } from "@/components/shop/ProductSlider";
+import { WeddingCollections } from "@/components/home/WeddingCollections";
+import { PromoBanner } from "@/components/home/PromoBanner";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { ClientShowcase } from "@/components/home/ClientShowcase";
 import { InstagramGallery } from "@/components/home/InstagramGallery";
-import { BookingCTA } from "@/components/home/BookingCTA";
-import { StoreSection } from "@/components/home/StoreSection";
-import { FAQSection } from "@/components/home/FAQSection";
-import { MarqueeStrip } from "@/components/common/MarqueeStrip";
+import { SectionDivider } from "@/components/common/SectionDivider";
+import {
+  getBestSellingProducts,
+  getNewArrivals,
+  getFeaturedProducts,
+  getTrendingProducts,
+} from "@/data/products";
 
 export function HomeBelowFold() {
+  const bestSellers = getBestSellingProducts(4);
+  const newArrivals = getNewArrivals(4);
+  const featured = getFeaturedProducts().slice(0, 4);
+  const trending = getTrendingProducts(4);
+
   return (
     <>
-      <BespokeSection />
-      <WeddingTimeline />
-      <MarqueeStrip speed={40} />
-      <FeaturedProducts />
-      <TestimonialsSection />
-      <ClientShowcase />
+      <SectionDivider label="Curated for the Groom" />
+      <ProductSlider
+        label="Bestsellers"
+        title="Best Selling"
+        subtitle="Most loved pieces by our grooms"
+        products={bestSellers}
+        viewAllHref="/shop?sort=featured"
+        tone="ivory"
+      />
+      <SectionDivider />
+      <ProductSlider
+        label="Just In"
+        title="New Arrivals"
+        subtitle="Fresh from the atelier"
+        products={newArrivals.length ? newArrivals : featured}
+        viewAllHref="/shop?sort=new"
+        tone="cream"
+      />
+      <WeddingCollections />
+      <SectionDivider label="Editorial Selection" />
+      <ProductSlider
+        label="Editor's Pick"
+        title="Featured Products"
+        products={featured}
+        viewAllHref="/shop"
+        tone="warm"
+      />
+      <ProductSlider
+        label="Trending"
+        title="Trending Styles"
+        subtitle="What grooms are shopping now"
+        products={trending}
+        viewAllHref="/shop"
+        tone="sand"
+      />
+      <PromoBanner />
+      <SectionDivider label="Style & Stories" />
       <InstagramGallery />
-      <BookingCTA />
-      <StoreSection />
-      <FAQSection />
+      <TestimonialsSection />
     </>
   );
 }

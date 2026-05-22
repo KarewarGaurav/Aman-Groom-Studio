@@ -2,228 +2,130 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IMAGES } from "@/lib/images";
 import { BRAND } from "@/lib/constants";
-
-const MARQUEE_WORDS = [
-  "Luxury Couture",
-  "·",
-  "Bespoke Tailoring",
-  "·",
-  "Royal Sherwanis",
-  "·",
-  "Imperial Tuxedos",
-  "·",
-  "Indo-Western",
-  "·",
-  "New Delhi Atelier",
-  "·",
-];
-
-function Particles() {
-  const dots = [
-    { left: "12%", top: "18%", size: 2, dur: 5 },
-    { left: "25%", top: "60%", size: 1, dur: 6 },
-    { left: "40%", top: "30%", size: 3, dur: 4 },
-    { left: "55%", top: "72%", size: 1, dur: 7 },
-    { left: "68%", top: "22%", size: 2, dur: 5 },
-    { left: "78%", top: "55%", size: 1, dur: 6 },
-    { left: "88%", top: "38%", size: 2, dur: 4.5 },
-    { left: "15%", top: "82%", size: 1, dur: 5.5 },
-    { left: "32%", top: "45%", size: 2, dur: 6.5 },
-    { left: "72%", top: "78%", size: 1, dur: 5 },
-  ];
-
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      {dots.map((d, i) => (
-        <motion.span
-          key={i}
-          className="absolute rounded-full bg-gold"
-          style={{ left: d.left, top: d.top, width: d.size, height: d.size }}
-          animate={{ opacity: [0.15, 0.7, 0.15], y: [0, -16, 0] }}
-          transition={{ duration: d.dur, repeat: Infinity, delay: i * 0.35 }}
-        />
-      ))}
-      {/* Larger soft glows */}
-      <motion.div
-        className="absolute left-[60%] top-[20%] h-64 w-64 orb bg-burgundy/20"
-        animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.15, 1] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute left-[10%] top-[50%] h-48 w-48 orb bg-gold/10"
-        animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.1, 1] }}
-        transition={{ duration: 6, repeat: Infinity, delay: 2 }}
-      />
-    </div>
-  );
-}
-
-function MarqueeStrip() {
-  const words = [...MARQUEE_WORDS, ...MARQUEE_WORDS];
-  return (
-    <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-t border-gold/15 bg-charcoal/60 backdrop-blur-sm py-3">
-      <div
-        className="flex gap-8 whitespace-nowrap"
-        style={{ animation: "marquee 28s linear infinite" }}
-      >
-        {words.map((w, i) => (
-          <span
-            key={i}
-            className={
-              w === "·"
-                ? "text-gold/60"
-                : "font-body text-[10px] uppercase tracking-[0.28em] text-champagne/60"
-            }
-          >
-            {w}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ScrollIndicator() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.4 }}
-      className="absolute bottom-16 right-8 z-20 hidden flex-col items-center gap-2 md:flex"
-      aria-hidden
-    >
-      <span className="editorial-label rotate-90 origin-center text-champagne/40">
-        Scroll
-      </span>
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity }}
-        className="flex h-8 w-px flex-col items-center"
-      >
-        <div className="h-6 w-px bg-gradient-to-b from-gold/60 to-transparent" />
-        <ArrowDown className="h-3 w-3 text-gold/60 -mt-1" />
-      </motion.div>
-    </motion.div>
-  );
-}
-
-const stagger = {
-  label:   { delay: 0.15, duration: 0.7 },
-  divider: { delay: 0.30, duration: 0.8 },
-  heading: { delay: 0.42, duration: 1.0 },
-  sub:     { delay: 0.60, duration: 0.8 },
-  ctas:    { delay: 0.76, duration: 0.7 },
-};
+import { useGsapHeroReveal } from "@/hooks/useGsapReveal";
 
 export function HeroSection() {
+  const ref = useGsapHeroReveal();
+
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      {/* Background image + overlays */}
-      <div className="absolute inset-0">
-        <Image
-          src={IMAGES.hero}
-          alt="Luxury groom couture editorial"
-          fill
-          priority
-          className="object-cover object-[72%_center] md:object-[68%_center]"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/10 to-charcoal/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/50 via-transparent to-transparent" />
-      </div>
+    <section
+      ref={ref}
+      className="relative overflow-hidden hero-editorial-bg pt-24 md:pt-28"
+    >
+      <div
+        className="hero-pattern-overlay pointer-events-none absolute inset-0 opacity-60"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -left-24 top-32 h-64 w-64 rounded-full bg-champagne/30 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -right-16 bottom-20 h-48 w-48 rounded-full bg-sandgold/15 blur-3xl"
+        aria-hidden
+      />
 
-      <div className="grain-overlay absolute inset-0 opacity-50" aria-hidden />
-      <Particles />
-      <ScrollIndicator />
-      <MarqueeStrip />
+      <div className="relative mx-auto max-w-7xl px-4 pb-16 md:px-8 lg:px-12 lg:pb-24">
+        <div className="mb-8 hidden items-center gap-3 md:flex" aria-hidden>
+          <span className="h-px w-12 bg-gradient-to-r from-transparent to-sandgold/70" />
+          <span className="editorial-label text-bronze/80">New Delhi · Couture</span>
+          <span className="h-px w-12 bg-gradient-to-l from-transparent to-sandgold/70" />
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex min-h-screen flex-col justify-center px-4 pb-24 pt-32 md:px-8 lg:px-12">
-        <div className="mx-auto w-full max-w-7xl">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+          <div className="order-2 md:order-1">
+            <div className="inline-flex items-center gap-3 rounded-full border border-sandgold/25 bg-warmwhite/70 px-4 py-1.5 shadow-soft backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden />
+              <p data-hero-label className="editorial-label !tracking-[0.32em]">
+                {BRAND.tagline}
+              </p>
+            </div>
+            <h1
+              data-hero-title
+              className="mt-5 font-displayAlt text-5xl font-medium leading-[1.05] text-charcoal md:text-6xl lg:text-7xl"
+            >
+              Shop Luxury
+              <br />
+              <span className="text-gradient-gold">Groom Fashion</span>
+            </h1>
+            <p
+              data-hero-sub
+              className="mt-6 max-w-md border-l-2 border-sandgold/40 pl-5 font-sans text-base leading-relaxed text-charcoalsoft md:text-lg"
+            >
+              Discover curated sherwanis, tuxedos, and wedding ensembles —
+              crafted for the modern groom.
+            </p>
+            <div
+              data-hero-cta
+              className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            >
+              <Button
+                asChild
+                size="lg"
+                variant="default"
+                className="hero-cta-btn !overflow-visible w-full sm:w-auto"
+              >
+                <Link href="/shop?category=sherwanis">Shop Sherwanis</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="gold"
+                className="hero-cta-btn !overflow-visible w-full sm:w-auto"
+              >
+                <Link href="/shop">Explore Collection</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="hero-cta-btn !overflow-visible w-full sm:w-auto"
+              >
+                <Link href="/shop?sort=new">New Arrivals</Link>
+              </Button>
+            </div>
+          </div>
 
-          {/* Label */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger.label}
-            className="mb-6 flex items-center gap-4"
-          >
-            <span className="h-px w-12 bg-gold/60" />
-            <p className="editorial-label">{BRAND.tagline}</p>
-          </motion.div>
-
-          {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...stagger.heading, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-4xl font-display text-5xl font-light leading-[1.04] text-ivory md:text-7xl lg:text-8xl"
-          >
-            Crafted for the
-            <br />
-            <em className="text-gradient-gold not-italic">Modern Maharaja</em>
-          </motion.h1>
-
-          {/* Divider */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ ...stagger.divider, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 h-px w-24 origin-left bg-gradient-to-r from-gold to-transparent"
-          />
-
-          {/* Sub */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger.sub}
-            className="mt-6 max-w-md font-body text-base text-champagne/85 md:text-lg"
-          >
-            Bespoke sherwanis, imperial tuxedos, and couture styling for the
-            groom who defines his era.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger.ctas}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <Button asChild size="lg" variant="gold">
-              <Link href="/shop">Explore Collection</Link>
-            </Button>
-            <Button asChild size="lg" variant="luxury">
-              <Link href="/booking">Book Styling Session</Link>
-            </Button>
-          </motion.div>
-
-          {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="mt-14 flex flex-wrap gap-6 border-t border-white/10 pt-8"
-          >
-            {[
-              ["500+", "Weddings Styled"],
-              ["Since 2018", "Delhi's Premier Atelier"],
-              ["Bespoke", "Lifetime Alterations"],
-            ].map(([stat, desc]) => (
-              <div key={stat}>
-                <p className="font-display text-xl text-gold">{stat}</p>
-                <p className="text-[11px] uppercase tracking-widest text-champagne/50">{desc}</p>
+          <div data-hero-visual className="relative order-1 md:order-2">
+            <div
+              className="pointer-events-none absolute -left-4 -top-4 z-0 h-24 w-24 border border-sandgold/20"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -bottom-3 -right-3 z-0 h-16 w-16 border border-bronze/25"
+              aria-hidden
+            />
+            <div className="hero-image-frame relative z-10 overflow-hidden rounded-sm">
+              <div className="relative aspect-[4/5] overflow-hidden bg-cream">
+                <Image
+                  src={IMAGES.hero}
+                  alt="Luxury groom fashion editorial"
+                  fill
+                  priority
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-champagne/25 via-transparent to-warmwhite/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/15 via-transparent to-champagne/10" />
               </div>
-            ))}
-          </motion.div>
+            </div>
+            <p
+              className="pointer-events-none absolute -bottom-6 right-4 z-20 hidden font-display text-[10px] uppercase tracking-[0.4em] text-bronze/60 md:block"
+              aria-hidden
+            >
+              Editorial · SS26
+            </p>
+          </div>
         </div>
       </div>
+
+      <div
+        className="gold-rule mx-auto max-w-7xl px-4 md:px-8 lg:px-12"
+        aria-hidden
+      />
     </section>
   );
 }

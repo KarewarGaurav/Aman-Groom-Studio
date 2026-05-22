@@ -3,11 +3,9 @@
 import { useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { ShopFilters } from "@/components/shop/ShopFilters";
 import { SectionWrapper } from "@/components/common/SectionWrapper";
-import { getProductsByCategory } from "@/data/products";
-import { CATEGORIES } from "@/lib/constants";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { products, getProductsByCategory } from "@/data/products";
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -16,6 +14,10 @@ function ShopContent() {
 
   const filtered = useMemo(() => {
     let list = getProductsByCategory(category);
+    if (sort === "new") {
+      list = list.filter((p) => p.isNew);
+      if (list.length === 0) list = products.filter((p) => p.isNew);
+    }
     if (sort === "price-asc") list = [...list].sort((a, b) => a.price - b.price);
     if (sort === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "featured") {
@@ -27,48 +29,23 @@ function ShopContent() {
   }, [category, sort]);
 
   return (
-    <div className="pt-28">
+    <div className="pt-24 md:pt-28">
       <SectionWrapper
         label="Shop"
-        title="Luxury Collections"
-        subtitle={`${filtered.length} curated pieces`}
+        title="All Collections"
+        subtitle={`${filtered.length} pieces — luxury groom fashion`}
+        tone="champagne"
       >
-        <div className="mb-10 flex flex-wrap gap-2">
-          <Link
-            href="/shop"
-            className={cn(
-              "px-4 py-2 text-xs uppercase tracking-widest transition-colors",
-              !category
-                ? "bg-gold text-charcoal"
-                : "glass-panel text-champagne hover:text-ivory"
-            )}
-          >
-            All
-          </Link>
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              href={cat.href}
-              className={cn(
-                "px-4 py-2 text-xs uppercase tracking-widest transition-colors",
-                category === cat.id
-                  ? "bg-gold text-charcoal"
-                  : "glass-panel text-champagne hover:text-ivory"
-              )}
-            >
-              {cat.label}
-            </Link>
-          ))}
-        </div>
+        <ShopFilters />
 
         {filtered.length === 0 ? (
-          <p className="py-20 text-center text-champagne/60">
-            No products in this category yet.
+          <p className="py-20 text-center text-charcoalsoft">
+            No products match this filter.
           </p>
         ) : (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
             {filtered.map((p, i) => (
-              <ProductCard key={p.id} product={p} index={i} />
+              <ProductCard key={p.id} product={p} index={i} quickAdd />
             ))}
           </div>
         )}
@@ -82,7 +59,7 @@ export default function ShopPage() {
     <Suspense
       fallback={
         <div className="flex min-h-[50vh] items-center justify-center pt-28">
-          <p className="animate-pulse text-gold">Loading collections...</p>
+          <p className="animate-pulse text-bronze">Loading shop...</p>
         </div>
       }
     >

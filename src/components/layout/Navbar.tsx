@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, Search, ShoppingBag, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BRAND, CATEGORIES } from "@/lib/constants";
@@ -12,6 +11,9 @@ import { useWishlistStore } from "@/store/wishlist-store";
 import { cn } from "@/lib/utils";
 import { SearchOverlay } from "./SearchOverlay";
 import { MobileMenu } from "./MobileMenu";
+import { UserMenu } from "./UserMenu";
+import { LuxuryImage } from "@/components/common/LuxuryImage";
+import { IMAGES } from "@/lib/images";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +30,7 @@ export function Navbar() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 40);
+        setScrolled(window.scrollY > 24);
         ticking = false;
       });
     };
@@ -43,10 +45,8 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed left-0 right-0 top-0 z-50 transition-all duration-500",
-          scrolled
-            ? "glass-panel py-3 shadow-lg"
-            : "bg-transparent py-5"
+          "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+          scrolled ? "navbar-glass py-3" : "navbar-glass-top py-4"
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
@@ -54,16 +54,16 @@ export function Navbar() {
             <Image
               src="/logo.png"
               alt={BRAND.name}
-              width={44}
-              height={44}
-              className="h-10 w-10 md:h-11 md:w-11"
+              width={40}
+              height={40}
+              className="h-9 w-9 md:h-10 md:w-10"
               priority
             />
             <div className="hidden sm:block">
-              <p className="font-display text-lg leading-none text-ivory">
+              <p className="font-display text-base leading-none text-charcoal md:text-lg">
                 {BRAND.name}
               </p>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-gold/80">
+              <p className="text-[9px] uppercase tracking-[0.25em] text-bronze">
                 {BRAND.tagline}
               </p>
             </div>
@@ -77,78 +77,80 @@ export function Navbar() {
             >
               <Link
                 href="/shop"
-                className="font-body text-sm uppercase tracking-widest text-champagne transition-colors hover:text-gold"
+                className="font-sans text-xs uppercase tracking-widest text-charcoalsoft transition-colors hover:text-burgundy"
               >
-                Collections
+                Shop
               </Link>
-              <AnimatePresence>
-                {megaOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    className="absolute left-1/2 top-full mt-4 w-[480px] -translate-x-1/2 glass-panel p-6"
+              {megaOpen && (
+                <div className="absolute left-1/2 top-full mt-3 w-[560px] -translate-x-1/2 glass-panel rounded-sm p-6 shadow-luxury">
+                  <div className="grid grid-cols-2 gap-4">
+                    {CATEGORIES.slice(0, 4).map((cat) => (
+                      <Link
+                        key={cat.id}
+                        href={cat.href}
+                        className="group flex gap-3 rounded-sm border border-transparent p-2 transition-all hover:border-sandgold/20 hover:bg-champagne/30"
+                      >
+                        <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-sm">
+                          <LuxuryImage
+                            src={IMAGES.categories[cat.imageKey]}
+                            alt=""
+                            aspectClass="aspect-[3/4]"
+                            sizes="56px"
+                          />
+                        </div>
+                        <span className="font-display text-base text-charcoal group-hover:text-burgundy">
+                          {cat.label}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                  <Link
+                    href="/shop"
+                    className="mt-4 block text-center text-[10px] uppercase tracking-widest text-bronze hover:text-burgundy"
                   >
-                    <div className="grid grid-cols-2 gap-4">
-                      {CATEGORIES.map((cat) => (
-                        <Link
-                          key={cat.id}
-                          href={cat.href}
-                          className="group p-3 transition-colors hover:bg-white/5"
-                        >
-                          <span className="font-display text-lg text-ivory group-hover:text-gold">
-                            {cat.label}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    View All Products →
+                  </Link>
+                </div>
+              )}
             </li>
+            {CATEGORIES.slice(0, 3).map((cat) => (
+              <li key={cat.id}>
+                <Link
+                  href={cat.href}
+                  className="font-sans text-xs uppercase tracking-widest text-charcoalsoft transition-colors hover:text-burgundy"
+                >
+                  {cat.label}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link
-                href="/#bespoke"
-                className="font-body text-sm uppercase tracking-widest text-champagne hover:text-gold"
+                href="/shop?sort=new"
+                className="font-sans text-xs uppercase tracking-widest text-burgundy"
               >
-                Bespoke
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/booking"
-                className="font-body text-sm uppercase tracking-widest text-champagne hover:text-gold"
-              >
-                Styling
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#store"
-                className="font-body text-sm uppercase tracking-widest text-champagne hover:text-gold"
-              >
-                Atelier
+                New
               </Link>
             </li>
           </ul>
 
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-1 md:gap-3">
+            <UserMenu />
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-champagne transition-colors hover:text-gold"
+              className="p-2 text-charcoalsoft transition-colors hover:text-burgundy"
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
             </button>
             <Link
               href="/wishlist"
-              className="relative hidden p-2 text-champagne hover:text-gold sm:block"
+              className="relative hidden p-2 text-charcoalsoft hover:text-burgundy sm:block"
               aria-label="Wishlist"
             >
               <Heart className="h-5 w-5" />
               {wishlistCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center bg-gold text-[10px] text-charcoal">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-burgundy text-[10px] text-warmwhite">
                   {wishlistCount}
                 </span>
               )}
@@ -156,22 +158,27 @@ export function Navbar() {
             <button
               type="button"
               onClick={openCart}
-              className="relative p-2 text-champagne hover:text-gold"
+              className="relative p-2 text-charcoalsoft hover:text-burgundy"
               aria-label="Cart"
             >
               <ShoppingBag className="h-5 w-5" />
               {itemCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center bg-gold text-[10px] text-charcoal">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-burgundy text-[10px] text-warmwhite">
                   {itemCount}
                 </span>
               )}
             </button>
-            <Button asChild size="sm" variant="gold" className="hidden md:inline-flex">
-              <Link href="/booking">Book Session</Link>
+            <Button
+              asChild
+              size="sm"
+              variant="default"
+              className="hidden md:inline-flex"
+            >
+              <Link href="/shop">Shop Now</Link>
             </Button>
             <button
               type="button"
-              className="p-2 text-champagne lg:hidden"
+              className="p-2 text-charcoal lg:hidden"
               onClick={() => setMobileOpen(true)}
               aria-label="Menu"
             >

@@ -9,14 +9,21 @@ export const BRAND = {
 } as const;
 
 export const CATEGORIES = [
-  { id: "sherwanis", label: "Sherwanis", href: "/shop?category=sherwanis" },
-  { id: "tuxedos", label: "Tuxedos", href: "/shop?category=tuxedos" },
-  { id: "indo-western", label: "Indo-Western", href: "/shop?category=indo-western" },
-  { id: "kurta-sets", label: "Kurta Sets", href: "/shop?category=kurta-sets" },
-  { id: "accessories", label: "Wedding Accessories", href: "/shop?category=accessories" },
-  { id: "custom", label: "Custom Tailoring", href: "/shop?category=custom" },
-  { id: "reception", label: "Reception Wear", href: "/shop?category=reception" },
+  { id: "sherwanis", label: "Sherwanis", href: "/shop?category=sherwanis", imageKey: "sherwanis" as const },
+  { id: "tuxedos", label: "Tuxedos", href: "/shop?category=tuxedos", imageKey: "tuxedos" as const },
+  { id: "indo-western", label: "Indo-Western", href: "/shop?category=indo-western", imageKey: "indoWestern" as const },
+  { id: "kurta-sets", label: "Kurta Sets", href: "/shop?category=kurta-sets", imageKey: "kurtaSets" as const },
+  { id: "reception", label: "Reception Wear", href: "/shop?category=reception", imageKey: "reception" as const },
+  { id: "accessories", label: "Wedding Accessories", href: "/shop?category=accessories", imageKey: "accessories" as const },
 ] as const;
+
+export const PROMO = {
+  code: "MAHARAJA10",
+  headline: "Wedding Season Offer",
+  subline: "10% off your first order — use code MAHARAJA10 at checkout",
+  cta: "Shop Now",
+  href: "/shop",
+} as const;
 
 export const BOOKING_SLOTS = [
   "10:00 AM",

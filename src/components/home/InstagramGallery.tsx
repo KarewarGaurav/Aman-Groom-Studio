@@ -1,81 +1,72 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Link from "next/link";
 import { Instagram } from "lucide-react";
 import { SectionWrapper } from "@/components/common/SectionWrapper";
 import { LuxuryImage } from "@/components/common/LuxuryImage";
 import { IMAGES } from "@/lib/images";
 import { BRAND } from "@/lib/constants";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 const aspectClasses = [
-  "aspect-[3/4]",   // tall — hero spot
+  "aspect-[3/4]",
   "aspect-square",
   "aspect-[3/4]",
   "aspect-square",
-  "aspect-[4/3]",   // wide
+  "aspect-[4/3]",
+  "aspect-square",
+  "aspect-[3/4]",
   "aspect-square",
 ];
 
 export function InstagramGallery() {
+  const gridRef = useGsapReveal<HTMLDivElement>({
+    childSelector: "[data-gallery-item]",
+    stagger: 0.05,
+    y: 16,
+  });
+
   return (
     <SectionWrapper
-      label="@amangroomstudio"
-      title="Gallery"
-      subtitle="Editorial moments from our atelier and celebrations"
+      label="Style Inspo"
+      title="Shop the Look"
+      subtitle="Editorial groom fashion — tap to explore"
       align="center"
+      tone="sand"
     >
-      {/* Masonry-style grid */}
-      <div className="columns-2 gap-3 md:columns-3 md:gap-4">
+      <div ref={gridRef} className="columns-2 gap-3 md:columns-4 md:gap-4">
         {IMAGES.gallery.map((src, i) => (
-          <motion.div
-            key={src}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-30px" }}
-            transition={{
-              duration: 0.65,
-              delay: i * 0.07,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="group mb-3 break-inside-avoid md:mb-4"
+          <Link
+            key={`${src}-${i}`}
+            href="/shop"
+            data-gallery-item
+            className="group mb-3 block break-inside-avoid overflow-hidden rounded-sm border border-sandgold/15 shadow-soft transition-all duration-300 hover:border-sandgold/30 hover:shadow-luxury md:mb-4"
           >
-            <div className="relative overflow-hidden">
+            <div className="relative">
               <LuxuryImage
                 src={src}
-                alt={`Groom couture editorial ${i + 1}`}
+                alt={`Groom fashion look ${i + 1}`}
                 aspectClass={aspectClasses[i] ?? "aspect-square"}
-                className="transition-transform duration-700 group-hover:scale-[1.04]"
+                className="transition-transform duration-500 group-hover:scale-[1.03]"
               />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-charcoal/70 opacity-0 backdrop-blur-[2px] transition-opacity duration-400 group-hover:opacity-100">
-                <Instagram className="h-6 w-6 text-gold" />
-                <p className="text-[10px] uppercase tracking-[0.25em] text-champagne/80">
-                  View on Instagram
-                </p>
+              <div className="absolute inset-0 flex items-center justify-center bg-charcoal/0 transition-colors group-hover:bg-charcoal/25">
+                <Instagram className="h-6 w-6 text-warmwhite opacity-0 transition-opacity group-hover:opacity-100" />
               </div>
             </div>
-          </motion.div>
+          </Link>
         ))}
       </div>
-
-      {/* Instagram CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.4 }}
-        className="mt-10 text-center"
-      >
+      <div className="mt-8 text-center">
         <a
           href={BRAND.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 border border-gold/30 px-8 py-3 text-[11px] uppercase tracking-[0.3em] text-champagne transition-colors hover:border-gold hover:text-gold"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-charcoalsoft transition-colors hover:text-burgundy"
         >
           <Instagram className="h-4 w-4" />
-          Follow @amangroomstudio
+          @amangroomstudio
         </a>
-      </motion.div>
+      </div>
     </SectionWrapper>
   );
 }

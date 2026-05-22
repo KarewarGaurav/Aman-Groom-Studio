@@ -8,61 +8,76 @@ interface LuxuryImageProps {
   src: string;
   alt: string;
   className?: string;
+  aspectClass?: string;
   priority?: boolean;
   sizes?: string;
-  aspectClass?: string;
+  fill?: boolean;
 }
 
 export function LuxuryImage({
   src,
   alt,
   className,
-  priority,
-  sizes = "(max-width: 768px) 100vw, 50vw",
   aspectClass = "aspect-[3/4]",
+  priority = false,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+  fill,
 }: LuxuryImageProps) {
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const isRemote = src.startsWith("http");
 
-  return (
-    <div
-      className={cn(
-        "relative overflow-hidden bg-gradient-to-br from-wine/50 to-charcoal",
-        aspectClass,
-        className
-      )}
-    >
-      {!loaded && !error && (
-        <div
-          className="absolute inset-0 z-[1] animate-pulse bg-gradient-to-br from-wine/40 via-charcoal to-burgundy/30"
-          aria-hidden
-        />
-      )}
-      {error ? (
-        <div className="absolute inset-0 z-[2] flex items-center justify-center p-6 text-center">
-          <p className="font-display text-lg text-champagne/50">{alt}</p>
-        </div>
-      ) : (
+  if (fill) {
+    return (
+      <div className={cn("relative overflow-hidden bg-cream", className)}>
+        {!loaded && (
+          <div
+            className="absolute inset-0 animate-pulse bg-gradient-to-br from-cream to-champagne/50"
+            aria-hidden
+          />
+        )}
         <Image
           src={src}
           alt={alt}
           fill
-          className={cn(
-            "object-cover transition-all duration-700 ease-out",
-            loaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.03]"
-          )}
-          sizes={sizes}
           priority={priority}
+          sizes={sizes}
+          unoptimized={isRemote}
+          className={cn(
+            "object-cover transition-opacity duration-500",
+            loaded ? "opacity-100" : "opacity-0"
+          )}
           onLoad={() => setLoaded(true)}
-          onError={() => {
-            setError(true);
-            setLoaded(true);
-          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        "relative overflow-hidden bg-cream",
+        aspectClass,
+        className
+      )}
+    >
+      {!loaded && (
+        <div
+          className="absolute inset-0 animate-pulse bg-gradient-to-br from-cream to-champagne/50"
+          aria-hidden
         />
       )}
-      <div
-        className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent"
-        aria-hidden
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        unoptimized={isRemote}
+        className={cn(
+          "object-cover transition-opacity duration-500",
+          loaded ? "opacity-100" : "opacity-0"
+        )}
+        onLoad={() => setLoaded(true)}
       />
     </div>
   );

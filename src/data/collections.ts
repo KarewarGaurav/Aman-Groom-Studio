@@ -10,7 +10,7 @@ export const collections: Collection[] = [
     description:
       "Opulent silhouettes inspired by Indian royalty — hand embroidery, rich silks, and ceremonial grandeur.",
     image: IMAGES.collections.sherwanis,
-    productIds: ["p1", "p8"],
+    productIds: ["p1", "p8", "p9", "p10"],
     featured: true,
   },
   {
@@ -21,7 +21,7 @@ export const collections: Collection[] = [
     description:
       "Precision-tailored tuxedos and formal wear for reception nights and cosmopolitan celebrations.",
     image: IMAGES.collections.tuxedos,
-    productIds: ["p2", "p7"],
+    productIds: ["p2", "p7", "p13"],
     featured: true,
   },
   {
@@ -32,7 +32,7 @@ export const collections: Collection[] = [
     description:
       "Contemporary silhouettes that honour tradition while embracing modern luxury.",
     image: IMAGES.collections.indoWestern,
-    productIds: ["p3", "p4"],
+    productIds: ["p3", "p4", "p11", "p12"],
     featured: true,
   },
   {
@@ -43,7 +43,7 @@ export const collections: Collection[] = [
     description:
       "Velvet blazers, embellished jackets, and after-party essentials.",
     image: IMAGES.collections.reception,
-    productIds: ["p7", "p2"],
+    productIds: ["p7", "p2", "p14"],
     featured: false,
   },
 ];
